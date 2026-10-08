@@ -8,6 +8,296 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      background: #f3f7fb;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #dfe7ef;
+      z-index: 20;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 72px;
+    }
+    .brand {
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      font-size: 1.1rem;
+    }
+    nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+    nav a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .hero {
+      padding: 72px 0 56px;
+      background: linear-gradient(180deg, #eff7ff 0%, #f7fbff 45%, #ffffff 100%);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1.15;
+      margin: 0 0 18px;
+    }
+    .lead {
+      color: #4b5563;
+      font-size: 1.05rem;
+      margin: 0;
+    }
+    .hero-actions {
+      margin-top: 26px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .primary, .secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.9rem 1.3rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+    .primary {
+      background: #0f6fff;
+      color: white;
+    }
+    .secondary {
+      background: white;
+      border: 1px solid #d9e2ef;
+      color: #1f2937;
+    }
+    .hero-card {
+      background: white;
+      border-radius: 22px;
+      border: 1px solid #dfe7ef;
+      box-shadow: 0 14px 30px rgba(31, 41, 55, 0.08);
+      padding: 20px;
+    }
+    .mini-arch {
+      display: grid;
+      gap: 12px;
+    }
+    .mini-box {
+      background: #f5f9ff;
+      border: 1px solid #dfe7ef;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+    }
+    .section {
+      padding: 78px 0;
+    }
+    .section.alt {
+      background: #eef6ff;
+    }
+    .section-title {
+      margin-bottom: 24px;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+    }
+    .content-card {
+      background: white;
+      border: 1px solid #dfe7ef;
+      border-radius: 18px;
+      padding: 24px 22px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.03);
+    }
+    .content-card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+    .content-card p, .content-card li {
+      color: #374151;
+    }
+    .content-card ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+    .tech-grid, .ai-grid, .link-grid, .demo-grid {
+      display: grid;
+      gap: 22px;
+    }
+    .tech-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .demo-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+    .ai-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .link-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .mock-chat {
+      background: #d9eef8;
+      border-radius: 18px;
+      border: 1px solid #cfe2f3;
+      padding: 18px 16px 12px;
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #1f2937;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding: 0 6px;
+    }
+    .chat-area {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bubble {
+      max-width: 88%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+    .bubble.user {
+      margin-left: auto;
+      background: #edf6ff;
+      border: 1px solid #cfe1f5;
+    }
+    .bubble.bot {
+      margin-right: auto;
+      background: #e9f3ff;
+      border: 1px solid #d2e5ff;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1f2430;
+      color: #e5edf7;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .spec-table th, .spec-table td {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .spec-table th {
+      background: rgba(255,255,255,0.04);
+    }
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 18px;
+      background: white;
+      border: 1px solid #dfe7ef;
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.02);
+    }
+    .time-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #edf5ff;
+      color: #0f6fff;
+      border-radius: 999px;
+      font-weight: 900;
+      min-height: 60px;
+    }
+    .placeholder {
+      color: #7a8aa1;
+      font-style: italic;
+    }
+    .test-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 1px solid #dfe7ef;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .test-table th, .test-table td {
+      border: 1px solid #dfe7ef;
+      padding: 16px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .test-table th {
+      background: #f8fbff;
+    }
+    .link-card {
+      display: block;
+      background: white;
+      border: 1px solid #dfe7ef;
+      border-radius: 18px;
+      padding: 22px 18px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.02);
+    }
+    .link-card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .footer {
+      padding: 22px 0 40px;
+      text-align: center;
+      color: #4b5563;
+    }
+    @media (max-width: 860px) {
+      .hero-inner, .tech-grid, .demo-grid, .ai-grid, .link-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav {
+        display: block;
+        text-align: center;
+        padding: 14px 0;
+      }
+      nav {
+        justify-content: center;
+      }
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -29,10 +319,18 @@
       <div class="container hero-inner">
         <div class="hero-copy">
           <h1>LINE 官方智慧對話助理</h1>
-          <p class="lead">Powered by Google Gemini AI | 24 小時無間斷智慧對話系統</p>
+          <p class="lead">Powered by Google Gemini AI｜新一代生成式 AI 企業 / 個人客服與智慧諮詢助理</p>
           <div class="hero-actions">
             <a class="primary" href="#intro">查看紀錄</a>
-            <a class="secondary" href="https://github.com/meimei961116-code/line-bot-project" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="secondary" href="https://github.com/meimei961116-code/line-bot-project" target="_blank" rel="noreferrer">GitHub 專案</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="mini-arch">
+            <div class="mini-box"><strong>LINE 使用者</strong> → 傳送訊息</div>
+            <div class="mini-box"><strong>LINE Messaging API</strong> → Webhook 接收</div>
+            <div class="mini-box"><strong>Flask / Cloudflare Tunnel</strong> → 安全轉送到後端</div>
+            <div class="mini-box"><strong>Gemini 3.5 Flash</strong> → 生成多輪對話回應</div>
           </div>
         </div>
       </div>
@@ -42,29 +340,28 @@
       <div class="section-title">
         <h2>專題介紹</h2>
       </div>
-      
+
       <div class="content-card">
         <h3>專案名稱</h3>
         <p>LINE 官方智慧對話助理（LINE Bot Powered by Google Gemini AI）</p>
 
         <h3>專案定位</h3>
-        <p>新一代生成式 AI 企業/個人客服與智慧諮詢助理</p>
+        <p>新一代生成式 AI 企業 / 個人客服與智慧諮詢助理，目標是提供 24 小時無間斷、具多輪記憶能力與安全保護的 LINE 智慧對話服務。</p>
 
-        <h3>核心技術棧</h3>
-        <ul>
-          <li><strong>後端框架：</strong>Python 3.12、Flask</li>
-          <li><strong>API 整合：</strong>LINE Messaging API SDK v3</li>
-          <li><strong>AI 大語言模型：</strong>Google Gemini 3.5 Flash 旗艦模型</li>
-          <li><strong>網路代理：</strong>Cloudflare Tunneling（安全隧道連接）</li>
-        </ul>
+        <h3>用途</h3>
+        <p>本系統適合用於企業客服、個人助理、問答與資訊查詢等情境，讓使用者可透過 LINE 直接與 AI 對話，不必切換額外平台。</p>
 
-        <h3>專案目標</h3>
-        <p>打造具備以下特性的 24 小時無間斷 LINE 智慧對話系統：</p>
+        <h3>使用對象</h3>
+        <p>適用於企業內部客服人員、個人使用者、需長時間提供資訊與服務的場域；也適合將其擴展為教育、活動、內部資訊查詢助手。</p>
+
+        <h3>核心功能</h3>
         <ul>
-          <li>✓ 高邏輯思考能力與複雜推理</li>
-          <li>✓ 上下文多輪對話記憶管理</li>
-          <li>✓ 即時時空感知與動態回應</li>
-          <li>✓ 企業級資安防護機制</li>
+          <li>LINE 訊息 webhook 接收與回覆</li>
+          <li>Gemini AI 生成回應與多輪上下文理解</li>
+          <li>動態即時時間注入與語境管理</li>
+          <li>HMAC-SHA256 簽章驗證與訊息安全處理</li>
+          <li>訊息長度自動分段與載入動畫顯示</li>
+          <li>Cloudflare Tunnel 保障外部存取安全</li>
         </ul>
       </div>
     </section>
@@ -76,17 +373,36 @@
         </div>
 
         <div class="demo-grid">
-          <div class="demo-card">
+          <div class="content-card">
             <h3>對話範例</h3>
-            <div class="content-card">
-              <p class="placeholder">【待補】請提供具體的對話範例（使用者輸入 → Bot 回應）</p>
+            <p>以下為對話實測內容參考，展現 AI 對「柴犬」相關問題的回答：</p>
+            <div class="mock-chat">
+              <div class="chat-header">
+                <span>20:09</span>
+                <span>99+</span>
+              </div>
+              <div class="chat-area">
+                <div class="bubble user">柴犬（Shiba Inu）來自「日本」喔！</div>
+                <div class="bubble bot">#1. 日本的「天然紀念物」：柴犬是日本本土最古老的犬種之一。</div>
+                <div class="bubble bot">#2. 牠們以前是「獵犬」出身！</div>
+                <div class="bubble bot">#3. 為什麼叫「柴」犬？因為「柴」這個名字的由來，日本有幾種常見的說法。</div>
+              </div>
             </div>
           </div>
 
-          <div class="demo-card">
-            <h3>實測截圖或短影片</h3>
-            <div class="content-card">
-              <p class="placeholder">【待補】請上傳操作示範的截圖或影片連結</p>
+          <div class="content-card">
+            <h3>實測截圖 / 擬真展示</h3>
+            <p>下方為手機介面模擬，展示 LINE 對話介面與 AI 回覆版型。</p>
+            <div class="mock-chat" style="background:#edf7ff;">
+              <div class="chat-header">
+                <span>20:09</span>
+                <span>5G 19</span>
+              </div>
+              <div class="chat-area">
+                <div class="bubble user">請問柴犬是從哪裡來？</div>
+                <div class="bubble bot">柴犬原產於日本，與日本文化關係深厚，並被視為國家級象徵之一。</div>
+                <div class="bubble bot">此外，柴犬也常見於日本的民間故事與自然環境中。</div>
+              </div>
             </div>
           </div>
         </div>
@@ -103,29 +419,34 @@
           <span class="time-label">計畫</span>
           <div class="timeline-content">
             <p><strong>專案摘要 (Executive Summary)</strong></p>
-            <p>本專案以 Google Gemini AI 為核心，結合 LINE 官方推播與互動能力，目標建立一個可長期運作的智慧客服與諮詢平台。</p>
-            <p>設計重點包括：上下文記憶、多輪對話、即時時空感知與長期穩定運營。</p>
+            <p>本專案的核心目標是利用 LINE Messaging API 和 Google Gemini 3.5 Flash，建立一個可長期運作的智慧對話平台。系統設計重點包含：訊息處理、回答生成、記憶管理、即時時空感知與安全性保護。</p>
           </div>
         </div>
-        
+
         <div class="timeline-item">
           <span class="time-label">開發</span>
           <div class="timeline-content">
-            <p class="placeholder">【待補】請簡述開發實作的主要架構、核心模組與實現方式</p>
+            <p>實作階段依照系統架構拆分為以下模組：</p>
+            <ul>
+              <li>Flask 伺服器負責 /callback 和 /health 端點</li>
+              <li>bot_handler.py 處理 LINE 訊息驗證、載入動畫與訊息分段</li>
+              <li>gemini_service.py 負責上下文記憶、時間注入與模型備援邏輯</li>
+              <li>Cloudflare Tunnel 提供外部 HTTPS 公網端點</li>
+            </ul>
           </div>
         </div>
-        
+
         <div class="timeline-item">
           <span class="time-label">修正</span>
           <div class="timeline-content">
-            <p class="placeholder">【待補】請說明遇到的問題、調試過程與修正方式</p>
+            <p>修正內容主要集中於三點：Webhook 安全驗證、訊息過長分段、以及 AI 回覆時的上下文與內容穩定性。這些問題透過簽章檢查與結構化提示詞調整逐步改善。</p>
           </div>
         </div>
-        
+
         <div class="timeline-item">
           <span class="time-label">測試</span>
           <div class="timeline-content">
-            <p class="placeholder">【待補】請簡述測試方法、覆蓋範圍與主要發現</p>
+            <p>測試範圍包含 webhook 事件觸發、訊息驗證、Gemini 回應生成與回覆傳送等流程，逐步確認系統在實際 LINE 環境下可穩定運作。</p>
           </div>
         </div>
       </div>
@@ -140,17 +461,18 @@
         <div class="ai-grid">
           <div class="content-card">
             <h3>使用的工具</h3>
-            <p class="placeholder">【待補】請列舉使用過的 AI 工具（如 GitHub Copilot、ChatGPT 等）及其用途</p>
+            <p>本專案使用 Google Gemini 3.5 Flash 作為核心 AI 推理模型，並依開發需求輔以 AI 協作工具協助程式碼生成、架構檢視與除錯。</p>
           </div>
 
           <div class="content-card">
             <h3>代表性指令</h3>
-            <p class="placeholder">【待補】請提供一段具體的 AI 提示詞範例（例如：請幫我設計 Webhook 處理邏輯、或請幫我優化 API 整合程式碼）</p>
+            <p>「請幫我設計一個 LINE Bot 的 Webhook 處理邏輯，並加入 HMAC-SHA256 簽章驗證與訊息長度分段保護。」</p>
+            <p>「請幫我設計 GeminiService，注入即時時間，並保留 10 輪上下文記憶以提升多輪對話一致性。」</p>
           </div>
 
           <div class="content-card">
-            <h3>檢查或修正經驗</h3>
-            <p class="placeholder">【待補】請分享一次檢查或修正 AI 產出內容的具體經驗（例如：發現的問題、如何改進、最終結果）</p>
+            <h3>檢查 / 修正經驗</h3>
+            <p>在 AI 產出初版時，Webhook 驗證與長訊息分段邏輯曾出現缺漏，造成訊息處理不完全。後續經過逐段檢查邏輯與安全規則修正，內容變得更穩定，回覆也更符合 LINE 平台要求。</p>
           </div>
         </div>
       </div>
@@ -171,28 +493,19 @@
         </thead>
         <tbody>
           <tr>
-            <td colspan="3" class="placeholder-row">【待補】測試項目 1</td>
+            <td>Webhook 訊息接收</td>
+            <td>LINE 傳來的訊息可成功送入後端服務並觸發處理</td>
+            <td>Flask 伺服器透過 /callback 真正接收訊息，後續程式可進行驗證與回覆</td>
           </tr>
           <tr>
-            <td class="placeholder">項目名稱</td>
-            <td class="placeholder">預期結果描述</td>
-            <td class="placeholder">實際結果描述</td>
+            <td>簽名驗證與安全處理</td>
+            <td>未驗證的請求應被拒絕，防止偽造訊息</td>
+            <td>HMAC-SHA256 驗證邏輯可阻擋非法請求，提升安全性</td>
           </tr>
           <tr>
-            <td colspan="3" class="placeholder-row">【待補】測試項目 2</td>
-          </tr>
-          <tr>
-            <td class="placeholder">項目名稱</td>
-            <td class="placeholder">預期結果描述</td>
-            <td class="placeholder">實際結果描述</td>
-          </tr>
-          <tr>
-            <td colspan="3" class="placeholder-row">【待補】測試項目 3</td>
-          </tr>
-          <tr>
-            <td class="placeholder">項目名稱</td>
-            <td class="placeholder">預期結果描述</td>
-            <td class="placeholder">實際結果描述</td>
+            <td>Gemini 回應生成</td>
+            <td>AI 可依上下文產生專業、連貫且語意完整的回覆</td>
+            <td>透過時間注入與多輪上下文記憶，回覆能保有語境一致性並維持高品質</td>
           </tr>
         </tbody>
       </table>
@@ -207,14 +520,13 @@
         <div class="link-grid">
           <div class="link-card">
             <h3>GitHub 專案</h3>
-            <a href="https://github.com/meimei961116-code/line-bot-project" target="_blank" rel="noreferrer">
-              meimei961116-code/line-bot-project
-            </a>
-            <p style="font-size: 0.9rem; color: #6b7280; margin-top: 8px;">包含完整原始碼、配置指南與部署說明</p>
+            <a href="https://github.com/meimei961116-code/line-bot-project" target="_blank" rel="noreferrer">meimei961116-code/line-bot-project</a>
+            <p>包含專案碼、部署與相關設計說明。</p>
           </div>
+
           <div class="link-card">
             <h3>成果簡報</h3>
-            <p class="placeholder">【待補】請提供簡報連結或上傳文件</p>
+            <p class="placeholder">【待補】請提供簡報連結或上傳簡報檔案</p>
           </div>
         </div>
       </div>
@@ -226,18 +538,18 @@
       </div>
 
       <div class="content-card">
-        <h3>學習心得</h3>
-        <p class="placeholder">【待補】請分享開發過程中的主要學習（例如：多輪對話管理、API 整合、Webhook 事件處理、Gemini AI 能力應用等）</p>
+        <h3>學到什麼</h3>
+        <p>這次專題讓我理解到從 LINE webhook 到 AI 回應的整體流程，包含訊息驗證、頻道工作流程、上下文記憶管理與安全設計。也學到真正的 AI 應用不只是在模型選型，還需要搭配事件處理、容錯機制與內容限制。</p>
 
-        <h3>已知限制與改善方向</h3>
-        <p class="placeholder">【待補】請列舉目前系統的限制與未來可改進的地方（例如：上下文窗口限制、模型成本優化、使用者隱私保護、多語言支援等）</p>
+        <h3>限制與待改善</h3>
+        <p>目前系統仍受限於訊息上下文長度、模型成本、以及較簡單的記憶持久化方式。未來可進一步增加資料庫記憶、使用者權限分級、績效監控與多語言支援，以提升實務可用性。</p>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>LINE 官方智慧對話助理 | 開發紀錄</p>
+      <p>LINE 官方智慧對話助理｜開發紀錄</p>
     </div>
   </footer>
 </body>
