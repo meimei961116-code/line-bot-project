@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LINE 官方智慧對話助理｜簡報</title>
+  <style>
+    :root {
+      --bg: #f3f7fb;
+      --panel: #ffffff;
+      --primary: #0f6fff;
+      --primary-soft: #eaf3ff;
+      --text: #1f2937;
+      --muted: #5b6473;
+      --line: #dfe7ef;
+      --accent: #0ea5e9;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .slides {
+      width: 100%;
+      max-width: 1400px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .slide {
+      position: relative;
+      min-height: 760px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .slide-inner {
+      padding: 52px 70px 46px;
+      height: 100%;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    h1, h2, h3, p, li { margin-top: 0; }
+
+    h1 {
+      font-size: 42px;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 36px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    p, li {
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    ul {
+      margin: 0 0 0 22px;
+      padding: 0;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 20px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.025);
+    }
+
+    .quote {
+      background: linear-gradient(135deg, #eef7ff 0%, #f9fbff 100%);
+      border-left: 6px solid var(--primary);
+      border-radius: 16px;
+      padding: 18px 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .demo-box {
+      background: #dfeefb;
+      border: 1px solid #cfe2f3;
+      border-radius: 18px;
+      padding: 18px 18px 12px;
+      min-height: 260px;
+    }
+
+    .chat {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .bubble.user {
+      margin-left: auto;
+      background: #edf6ff;
+      border: 1px solid #cfe1f5;
+    }
+
+    .bubble.bot {
+      margin-right: auto;
+      background: #e9f3ff;
+      border: 1px solid #d2e5ff;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 16px;
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 30px;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .table th, .table td {
+      border: 1px solid var(--line);
+      text-align: left;
+      padding: 14px 16px;
+      font-size: 17px;
+      vertical-align: top;
+    }
+
+    .table th {
+      background: #f7fbff;
+      color: var(--text);
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .check-item {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 16px;
+    }
+
+    .check-item strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .footer-note {
+      position: absolute;
+      right: 34px;
+      bottom: 18px;
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 980px) {
+      .slide-inner { padding: 36px 30px 32px; }
+      .two-col, .metrics, .check-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 28px; }
+      p, li { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slides">
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="slide-header">
+          <div class="tag">第 1 頁</div>
+          <div class="tag">專題背景</div>
+        </div>
+        <h1>LINE 官方智慧對話助理</h1>
+        <p style="font-size: 20px; color: var(--muted); margin-top: 10px;">Powered by Google Gemini AI</p>
+
+        <div class="two-col" style="margin-top: 24px;">
+          <div>
+            <h3>使用對象</h3>
+            <ul>
+              <li>企業客服與內部問答場景</li>
+              <li>個人資訊查詢或助理需求</li>
+              <li>教育、活動、服務問答類應用</li>
+            </ul>
+
+            <h3 style="margin-top: 22px;">想解決的問題</h3>
+            <ul>
+              <li>訊息回覆常需人工處理，效率不高</li>
+              <li>使用者希望能透過熟悉的 LINE 直接取用資訊</li>
+              <li>需要 24 小時不間斷、具上下文理解的對話體驗</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>專案定位</h3>
+            <p class="quote">新一代生成式 AI 企業 / 個人客服與智慧諮詢助理</p>
+            <p>本作品以 LINE 為入口，將 AI 對話能力整合到現有聊天環境中，讓使用者可以在熟悉的介面中提問、取得資訊與解答。</p>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><strong>24h</strong><span>無間斷服務</span></div>
+          <div class="metric"><strong>AI</strong><span>Gemini 推理</span></div>
+          <div class="metric"><strong>LINE</strong><span>官方平台整合</span></div>
+        </div>
+        <div class="footer-note">專題簡報｜LINE Bot 開發紀錄</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="slide-header">
+          <div class="tag">第 2 頁</div>
+          <div class="tag">核心功能</div>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <h2>核心功能</h2>
+            <ul>
+              <li>LINE Webhook 接收使用者訊息與回覆內容</li>
+              <li>Gemini AI 生成自然、連貫的回應</li>
+              <li>可保留上下文資訊，支援多輪對話</li>
+              <li>動態注入時間與語境，提高回答貼近現況</li>
+              <li>訊息長度分段與載入動畫，提高互動體驗</li>
+              <li>安全驗證、外部通道保護與穩定部署</li>
+            </ul>
+          </div>
+
+          <div class="demo-box">
+            <div class="chat">
+              <div class="bubble user">柴犬（Shiba Inu）來自「日本」嗎？</div>
+              <div class="bubble bot">是的，柴犬是日本最代表性的犬種之一，也被列為天然紀念物。</div>
+              <div class="bubble bot">它的歷史、毛色與狩獵背景都和日本文化有深厚關聯。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;">
+          <h3>與使用者互動的方式</h3>
+          <p>使用者只需要在 LINE 中輸入問題，後端即透過 LINE Messaging API 接收訊息，交由 Gemini AI 分析，再將回覆發回聊天室。這樣的流程能讓使用者維持在熟悉的溝通情境內完成提問與接收答案。</p>
+        </div>
+        <div class="footer-note">作品如何運作：使用者訊息 → LINE 平台 → 後端 → AI 生成 → 回覆使用者</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="slide-header">
+          <div class="tag">第 3 頁</div>
+          <div class="tag">實際操作 / 測試</div>
+        </div>
+
+        <h2>實際操作與測試結果</h2>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>操作流程</h3>
+            <ul>
+              <li>使用者在 LINE 傳送訊息</li>
+              <li>Webhook 事件被後端接收</li>
+              <li>系統檢查簽章與安全資訊</li>
+              <li>Gemini 依上下文生成回答</li>
+              <li>回覆內容再發回 LINE</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>實際測試觀察</h3>
+            <p>在實際測試中，AI 可正確回答與題目相關的背景知識。內容會依上下文生成，並保持語意連貫。</p>
+            <p style="margin-bottom: 0;">例如：詢問「柴犬來自日本嗎？」時，系統會帶出其起源、文化象徵與歷史背景。</p>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>測試項目</th>
+              <th>預期結果</th>
+              <th>實際結果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Webhook 訊息接收</td>
+              <td>訊息可成功進入後端</td>
+              <td>成功接收並進行處理</td>
+            </tr>
+            <tr>
+              <td>安全驗證</td>
+              <td>非法請求被拒絕</td>
+              <td>簽章驗證有效，能阻止偽造請求</td>
+            </tr>
+            <tr>
+              <td>Gemini 回覆</td>
+              <td>能產生連貫、專業回覆</td>
+              <td>可產生符合語境的回答</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="footer-note">測試重點：接收、驗證、生成、回覆 4 個流程都要成立</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="slide-header">
+          <div class="tag">第 4 頁</div>
+          <div class="tag">AI 協作</div>
+        </div>
+
+        <h2>AI 如何協助，以及我如何檢查與修正</h2>
+
+        <div class="check-grid">
+          <div class="check-item">
+            <strong>AI 協助內容</strong>
+            <p>協助設計 webhook 邏輯、訊息處理流程、以及 Gemini 整合架構。</p>
+          </div>
+          <div class="check-item">
+            <strong>代表提示</strong>
+            <p>「請幫我設計 LINE Bot 的 Webhook 處理邏輯，加入安全驗證與長訊息分段保護。」</p>
+          </div>
+          <div class="check-item">
+            <strong>檢查方式</strong>
+            <p>比對流程邏輯、檢查驗證規則、確認輸出語意是否符合需求與平台限制。</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;">
+          <h3>修正經驗</h3>
+          <p>在 AI 產出初版時，Webhook 驗證與長訊息分段邏輯曾有缺漏，導致某些情況無法正確處理。之後我重新檢查完流程與安全限制，調整了驗證與分段方式，讓系統更穩定，也更符合 LINE 平台的運作規範。</p>
+        </div>
+
+        <p style="margin-top: 18px; color: var(--muted);">重點：AI 可以加速開發，但最終仍需靠人來確認架構、限制與正確性。</p>
+        <div class="footer-note">AI 協作不是直接交付，而是協同加速驗證與修正</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="slide-header">
+          <div class="tag">第 5 頁</div>
+          <div class="tag">結論</div>
+        </div>
+
+        <h2>心得、限制與下一步</h2>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>學習心得</h3>
+            <p>這次專題讓我更理解 LINE Bot 不只是聊天程式，而是將 AI 能力與平台訊息、資訊安全、事件處理整合在一起的系統工程。</p>
+            <p>我也學到，真正影響成敗的，往往不是模型本身，而是流程設計、錯誤處理與穩定性。</p>
+          </div>
+
+          <div class="card">
+            <h3>目前限制</h3>
+            <ul>
+              <li>上下文長度仍有限制</li>
+              <li>記憶若未持久化，對話歷史會受限</li>
+              <li>模型成本和回應速度需要更細緻管理</li>
+              <li>實際商業場景仍需更完整的權限與數據保護</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;">
+          <h3>下一步</h3>
+          <p>未來可以增加資料庫記憶、使用者權限分級、多語言支援以及更完整的錯誤監控與日誌分析，讓這個 LINE 智慧助理更接近真實商務系統。</p>
+        </div>
+
+        <div class="footer-note">結論：此作品已具備完整可展示的 AI 對話系統雛形，未來可進一步實作商業化功能</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
